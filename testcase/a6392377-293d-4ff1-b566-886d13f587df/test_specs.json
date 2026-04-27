@@ -1,0 +1,15 @@
+{
+  "name": "Integration - Agent Process Returns Success with Valid Context",
+  "description": "Tests the HRDocumentProcessorAgent.process method end-to-end with mocked context chunks and LLM response.",
+  "test_type": "integration",
+  "input": "Mocked ChunkRetriever.get_context_chunks returns non-empty list; LLMService.generate_answer returns a valid answer.",
+  "output": "Dict with {'success': True, 'result': <answer string>}.",
+  "success_criteria": [
+    "result['success'] is True",
+    "result['result'] is not None",
+    "result['result'] is a string and not empty"
+  ],
+  "error_scenarios": [
+    "ChunkRetriever or LLMService raises exception"
+  ]
+}
