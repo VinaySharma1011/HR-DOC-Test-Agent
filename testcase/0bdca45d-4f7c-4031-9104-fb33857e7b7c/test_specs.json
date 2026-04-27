@@ -1,0 +1,16 @@
+{
+  "name": "Functional - Query Endpoint Returns Fallback When No Documents",
+  "description": "Checks that the /query endpoint returns a fallback response when no relevant HR document content is found.",
+  "test_type": "functional",
+  "input": "HTTP POST request to /query endpoint with no documents indexed or retrievable.",
+  "output": "JSON response with {'success': False, 'result': None, 'fallback': <fallback message>}.",
+  "success_criteria": [
+    "response.status_code == 200",
+    "response.json()['success'] is False",
+    "response.json()['result'] is None",
+    "response.json()['fallback'] == \"I'm sorry, I could not find the answer to your question in the provided HR documents.\""
+  ],
+  "error_scenarios": [
+    "Azure AI Search returns empty result"
+  ]
+}
