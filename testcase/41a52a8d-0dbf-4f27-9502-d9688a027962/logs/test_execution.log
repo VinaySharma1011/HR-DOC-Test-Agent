@@ -1,0 +1,60 @@
+=== PYTEST EXECUTION LOG ===
+
+Exit Code: 1
+
+STDOUT:
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.0.3, pluggy-1.6.0 -- /tmp/test_venv_exec_7mcvoqmi/venv/bin/python
+cachedir: .pytest_cache
+metadata: {'Python': '3.11.15', 'Platform': 'Linux-5.15.0-1102-azure-x86_64-with-glibc2.41', 'Packages': {'pytest': '9.0.3', 'pluggy': '1.6.0'}, 'Plugins': {'asyncio': '1.3.0', 'anyio': '4.13.0', 'json-report': '1.5.0', 'metadata': '3.1.1'}}
+rootdir: /tmp/test_venv_exec_7mcvoqmi
+configfile: pytest.ini
+plugins: asyncio-1.3.0, anyio-4.13.0, json-report-1.5.0, metadata-3.1.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 2 items
+
+test_agent.py::test_integration_agent_process_returns_fallback_when_no_context FAILED [ 50%]
+test_agent.py::test_integration_agent_process_returns_fallback_when_chunkretriever_raises_exception FAILED [100%]
+
+=================================== FAILURES ===================================
+_______ test_integration_agent_process_returns_fallback_when_no_context ________
+
+    @pytest.mark.asyncio
+    async def test_integration_agent_process_returns_fallback_when_no_context():
+        """
+        Integration test: HRDocumentProcessorAgent.process returns fallback when no context chunks are retrieved.
+        Mocks ChunkRetriever.get_context_chunks to return empty list.
+        """
+        with patch("agent.ChunkRetriever.get_context_chunks", new_callable=AsyncMock) as mock_get_chunks:
+            mock_get_chunks.return_value = []
+            agent = HRDocumentProcessorAgent()
+>           result = pytest.run(asyncio_coroutine=agent.process())
+                     ^^^^^^^^^^
+E           AttributeError: module 'pytest' has no attribute 'run'
+
+test_agent.py:15: AttributeError
+_ test_integration_agent_process_returns_fallback_when_chunkretriever_raises_exception _
+
+    @pytest.mark.asyncio
+    async def test_integration_agent_process_returns_fallback_when_chunkretriever_raises_exception():
+        """
+        Integration test: HRDocumentProcessorAgent.process returns fallback when ChunkRetriever raises exception.
+        Mocks ChunkRetriever.get_context_chunks to raise Exception.
+        """
+        with patch("agent.ChunkRetriever.get_context_chunks", new_callable=AsyncMock) as mock_get_chunks:
+            mock_get_chunks.side_effect = Exception("Search failure")
+            agent = HRDocumentProcessorAgent()
+>           result = pytest.run(asyncio_coroutine=agent.process())
+                     ^^^^^^^^^^
+E           AttributeError: module 'pytest' has no attribute 'run'
+
+test_agent.py:30: AttributeError
+--------------------------------- JSON report ----------------------------------
+report saved to: /tmp/test_venv_exec_7mcvoqmi/pytest_report.json
+=========================== short test summary info ============================
+FAILED test_agent.py::test_integration_agent_process_returns_fallback_when_no_context
+FAILED test_agent.py::test_integration_agent_process_returns_fallback_when_chunkretriever_raises_exception
+============================== 2 failed in 0.75s ===============================
+
+
+STDERR:
