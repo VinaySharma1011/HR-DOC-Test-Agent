@@ -1,0 +1,17 @@
+{
+  "name": "Functional - Query Endpoint Returns Success with Valid Documents",
+  "description": "Ensures that the /query endpoint returns a successful response with a non-empty result when relevant HR documents are available.",
+  "test_type": "functional",
+  "input": "HTTP POST request to /query endpoint with all required Azure/OpenAI config set and documents indexed.",
+  "output": "JSON response with {'success': True, 'result': <non-empty string>}.",
+  "success_criteria": [
+    "response.status_code == 200",
+    "response.json()['success'] is True",
+    "response.json()['result'] is not None",
+    "response.json()['result'] is a string and not empty"
+  ],
+  "error_scenarios": [
+    "Azure AI Search or OpenAI API not configured",
+    "No HR documents indexed"
+  ]
+}
