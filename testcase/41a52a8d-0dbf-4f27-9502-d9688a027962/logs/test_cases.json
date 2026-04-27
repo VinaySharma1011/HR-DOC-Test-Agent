@@ -1,0 +1,11 @@
+[
+  {
+    "id": "test_1",
+    "name": "Integration - Agent Process Returns Fallback When No Context",
+    "description": "Test: Integration - Agent Process Returns Fallback When No Context",
+    "type": "integration",
+    "status": "failed",
+    "duration": 0.0,
+    "error": "@pytest.mark.asyncio\n    async def test_integration_agent_process_returns_fallback_when_no_context():\n        \"\"\"\n        Integration test: HRDocumentProcessorAgent.process returns fallback when no context chunks are retrieved.\n        Mocks ChunkRetriever.get_context_chunks to return empty list.\n        \"\"\"\n        with patch(\"agent.ChunkRetriever.get_context_chunks\", new_callable=AsyncMock) as mock_get_chunks:\n            mock_get_chunks.return_value = []\n            agent = HRDocumentProcessorAgent()\n>           result = pytest.run(asyncio_coroutine=agent.process())\n                     ^^^^^^^^^^\nE           AttributeError: module 'pytest' has no attribute 'run'\n\ntest_agent.py:15: AttributeError"
+  }
+]
