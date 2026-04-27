@@ -1,0 +1,16 @@
+{
+  "name": "Integration - Query Endpoint Handles Agent Exception Gracefully",
+  "description": "Ensures that the /query endpoint returns a structured error response if HRDocumentProcessorAgent.process raises an exception.",
+  "test_type": "integration",
+  "input": "Mock HRDocumentProcessorAgent.process to raise an Exception; POST to /query.",
+  "output": "JSON response with {'success': False, 'error': <error message>, 'tips': [<tips list>]}.",
+  "success_criteria": [
+    "response.status_code == 200",
+    "response.json()['success'] is False",
+    "'error' in response.json()",
+    "'tips' in response.json()"
+  ],
+  "error_scenarios": [
+    "Agent process raises runtime exception"
+  ]
+}
