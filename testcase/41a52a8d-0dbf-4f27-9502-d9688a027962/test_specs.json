@@ -1,0 +1,15 @@
+{
+  "name": "Integration - Agent Process Returns Fallback When No Context",
+  "description": "Tests HRDocumentProcessorAgent.process returns fallback when no context chunks are retrieved.",
+  "test_type": "integration",
+  "input": "Mocked ChunkRetriever.get_context_chunks returns empty list.",
+  "output": "Dict with {'success': False, 'result': None, 'fallback': <fallback message>}.",
+  "success_criteria": [
+    "result['success'] is False",
+    "result['result'] is None",
+    "result['fallback'] == \"I'm sorry, I could not find the answer to your question in the provided HR documents.\""
+  ],
+  "error_scenarios": [
+    "ChunkRetriever raises exception"
+  ]
+}
