@@ -1,0 +1,2 @@
+Pre-pytest Syntax Auto-fix Warnings:
+  - Test auto-repair: converted 2 @pytest.mark.asyncio test(s) to async def
